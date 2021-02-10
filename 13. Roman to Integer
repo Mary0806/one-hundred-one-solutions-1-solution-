@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int romanToInt(string s) {
+        int result = 0;
+        map <char, int> translate;
+        translate['I'] = 1;
+        translate['V'] = 5;
+        translate['X'] = 10;
+        translate['L'] = 50;
+        translate['C'] = 100;
+        translate['D'] = 500;
+        translate['M'] = 1000;
+        for (int i = 0; i < s.size(); i++){
+            if (s[i] == 'I' && (s[i+1] == 'V' || s[i+1] == 'X')){
+                result += translate[s[i+1]] - 1;
+                i++;
+            }
+            
+            else if (s[i] == 'X' && (s[i+1] == 'L' || s[i+1] == 'C')){
+                result += translate[s[i+1]] - 10;
+                i++;
+            }
+            
+            else if (s[i] == 'C' && (s[i+1] == 'D' || s[i+1] == 'M')){
+                result += translate[s[i+1]] - 100;
+                i++;
+            }
+            
+            else{
+                result += translate[s[i]];
+            }
+        }
+        return result;
+    }
+};
